@@ -17,10 +17,18 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(b1, "id"))
         self.assertIsInstance(b1.id, str)
 
+    def test_str(self):
+        b1 = BaseModel()
+        str_rep = b1.__str__()
+        self.assertIsNotNone(str_rep)
+        self.assertIsInstance(str_rep, str)
+
     def test_save(self):
         """tests the save function"""
         b1 = BaseModel()
-        self.assertIsNotNone(b1.save)
+        updated_at = b1.save()
+        self.assertEqual(updated_at, b1.updated_at)
+        self.assertIsNotNone(b1.save())
         self.assertIsInstance(b1.updated_at, datetime.datetime)
 
     def test_to_dict(self):
