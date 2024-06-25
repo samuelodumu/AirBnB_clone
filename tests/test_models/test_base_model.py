@@ -2,7 +2,7 @@
 """contains "TestBaseModel" class"""
 
 from models.base_model import BaseModel
-import datetime
+import datetime as dt
 import unittest
 
 
@@ -26,6 +26,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(self.bm1.id, self.bm2.id)
         self.assertIsInstance(self.bm1.id, str)
 
+    def test_kwargs(self):
+        """tests that kwargs can be used to construct a Basemodel object"""
+        b1 = BaseModel(id='fe1f3a30-17e4-4d36-b8ec-c94f1ffcvr3g',
+                       created_at='2024-06-25T18:44:33.783706',
+                       updated_at='2024-06-25T18:44:33.783733',
+                       __class__='BaseModel')
+        self.assertIsInstance(b1, BaseModel)
+        self.assertIsInstance(b1.created_at, dt.datetime)
+        self.assertIsInstance(b1.updated_at, dt.datetime)
+
     def test_str(self):
         """tests for __str__ function"""
         str_rep = str(self.bm1)
@@ -38,7 +48,7 @@ class TestBaseModel(unittest.TestCase):
         updated_at = self.bm1.save()
         self.assertEqual(updated_at, self.bm1.updated_at)
         self.assertIsNotNone(self.bm1.save())
-        self.assertIsInstance(self.bm1.updated_at, datetime.datetime)
+        self.assertIsInstance(self.bm1.updated_at, dt.datetime)
 
     def test_to_dict(self):
         """tests the to_dict function"""

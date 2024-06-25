@@ -8,11 +8,28 @@ import uuid
 
 class BaseModel:
     """defines all common attributes/methods for other classes"""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initializing instance ids"""
-        self.id = str(uuid.uuid4())
-        self.created_at = dt.datetime.now()
-        self.updated_at = dt.datetime.now()
+        if not kwargs:
+            self.id = str(uuid.uuid4())
+            self.created_at = dt.datetime.now()
+            self.updated_at = dt.datetime.now()
+        else:
+            for key, value in kwargs.items():
+                if key in ['id', 'created_at', 'updated_at']:
+                    if key == 'created_at':
+                        value = dt.datetime.fromisoformat(value)
+                        setattr(self, key, value)
+                    if key == 'updated_at':
+                        value = dt.datetime.fromisoformat(value)
+                        setattr(self, key, value)
+                    setattr(self, key, value)
+            if 'id' not in kwargs:
+                self.id = str(uuid.uuid4())
+            if 'created_at' not in kwargs:
+                self.created_at = dt.datetime.now()
+            if 'updated_at' not in kwargs:
+                self.updated_at = dt.datetime.now()
 
     def __str__(self):
         """string representation"""
