@@ -18,6 +18,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(b1.id, str)
 
     def test_str(self):
+        """tests for __str__ function"""
         b1 = BaseModel()
         str_rep = b1.__str__()
         self.assertIsNotNone(str_rep)
