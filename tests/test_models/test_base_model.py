@@ -21,8 +21,9 @@ class TestBaseModel(unittest.TestCase):
         """tests for __str__ function"""
         b1 = BaseModel()
         str_rep = b1.__str__()
-        self.assertIsNotNone(str_rep)
-        self.assertIsInstance(str_rep, str)
+        self.assertEqual(str_rep, b1.__str__())
+        self.assertIsNotNone(b1.__str__())
+        self.assertIsInstance(b1.__str__(), str)
 
     def test_save(self):
         """tests the save function"""
