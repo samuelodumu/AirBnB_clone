@@ -30,8 +30,8 @@ class TestBaseModel(unittest.TestCase):
         """tests for __str__ function"""
         str_rep = str(self.bm1)
         expected_str_rep = \
-            f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
-        self.assertEqual(str_rep, str(self.bm1))
+            f"[BaseModel] ({self.bm1.id}) {self.bm1.__dict__}"
+        self.assertEqual(str_rep, expected_str_rep)
 
     def test_save(self):
         """tests the save function"""
