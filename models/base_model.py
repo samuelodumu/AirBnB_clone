@@ -3,6 +3,8 @@
 
 import datetime as dt
 import json
+from models import storage
+from models.engine.file_storage import FileStorage
 import uuid
 
 
@@ -14,6 +16,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = dt.datetime.now()
             self.updated_at = dt.datetime.now()
+            storage.new(self)
         else:
             for key, value in kwargs.items():
                 if key in ['id', 'created_at', 'updated_at']:
@@ -37,6 +40,7 @@ class BaseModel:
 
     def save(self):
         """updates `updated_at` attribute with the current datetime"""
+        storage.save()
         self.updated_at = dt.datetime.now()
         return self.updated_at
 
