@@ -35,7 +35,7 @@ class FileStorage:
             FileStorage.__objects.update(existing_data)
 
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as f:
-            json.dump(FileStorage.__objects, f, indent=4)
+            json.dump(FileStorage.__objects, f)
             # print(f"Type of existing_data: {type(existing_data)}")
 
     def reload(self):
