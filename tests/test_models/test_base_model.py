@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""contains "TestBaseModel" class"""
+"""contains `TestBaseModel` class"""
 
 from models.base_model import BaseModel
 import datetime as dt
